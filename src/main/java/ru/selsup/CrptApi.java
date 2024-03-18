@@ -26,7 +26,6 @@ public class CrptApi {
     public CrptApi(TimeUnit timeUnit, int requestLimit) {
         this.creationTime = LocalDateTime.now();
         this.lastPossibleTime = creationTime.plus(1 , timeUnit.toChronoUnit());
-        System.out.println(creationTime + "- create |||||||||| last - " + lastPossibleTime);
         gson = new Gson();
         this.timeUnit = timeUnit;
         this.requestLimit = requestLimit;
@@ -54,8 +53,6 @@ public class CrptApi {
                 CrptApi.requestCount = 0;
                 creationTime = creationTime.plus(1, timeUnit.toChronoUnit());
                 lastPossibleTime = creationTime.plus(1, timeUnit.toChronoUnit());
-                System.out.println("\n\nafter wait\n\n");
-                System.out.println(creationTime + "- create |||||||||| last - " + lastPossibleTime);
                 sendRequest(documentJson, signature);
             }
         }
@@ -76,7 +73,7 @@ public class CrptApi {
                 System.out.println("Response code: " + response.statusCode());
                 System.out.println("Response body: " + response.body());
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }
